@@ -20,8 +20,9 @@ public class HandlerHttp implements HttpHandler {
         if ("POST".equals(exchange.getRequestMethod())){
             System.out.println("Post method");
             String bodyMessage = ReadBody(exchange);
-            System.out.println("Response: " + bodyMessage);
+            System.out.println("Response:\n" + bodyMessage);
             SendResponse(exchange);
+            ParseBody(bodyMessage);
         } else if ("GET".equals(exchange.getRequestMethod())){
             SendResponse(exchange);
             System.out.println("This get method");
@@ -35,7 +36,7 @@ public class HandlerHttp implements HttpHandler {
         try {
             while ((line = br.readLine()) != null) {
                 response.append(line);
-                response.append('\r');
+                response.append("\n");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -60,13 +61,14 @@ public class HandlerHttp implements HttpHandler {
     }
 
     public void ParseBody(String response){
-        String message = response.toString();
+        String message = response;
         JSONObject jo = new JSONObject(message);
-        int id = jo.getInt("Id");
+        int id = jo.getInt("id");
 
         switch (id){
             case 1:
-
+                String nickname = jo.getString("nickname");
+                System.out.printf("id = %d\nnickname = %s", id, nickname);
                 break;
             case 2:
 
