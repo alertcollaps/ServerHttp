@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -cp target/ServerHttp-1.0-SNAPSHOT.jar com.company.Main
+web: java -Dserver.port=$PORT $JAVA_OPTS -cp target/ServerHttp-1.0-SNAPSHOT.jar com.company.Main
